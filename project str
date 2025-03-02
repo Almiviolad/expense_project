@@ -1,0 +1,33 @@
+expense_app/
+│
+├── app/
+│   ├── __init__.py        # App factory and main app initialization
+│   ├── extensions.py      # Initialize extensions like bcrypt, SQLAlchemy, etc.
+│   ├── models/            # Models folder for database models
+│   │   ├── __init__.py    # Makes models a package
+│   │   ├── user.py        # User model
+│   │   └── expense.py     # Expense model
+│   ├── blueprints/        # Folder for Blueprints
+│   │   ├── auth/          # Authentication module
+│   │   │   ├── __init__.py # Auth Blueprint
+│   │   │   ├── routes.py   # Login, register, logout routes
+│   │   │   ├── forms.py    # Forms for authentication
+│   │   │   └── utils.py    # Utility functions (e.g., token generation)
+│   │   ├── expense/       # Expense management module
+│   │       ├── __init__.py # Expense Blueprint
+│   │       ├── routes.py   # Add, edit, delete expenses
+│   │       ├── forms.py    # Forms for expense creation/editing
+│   │       └── utils.py    # Expense-related utilities
+│   ├── templates/         # HTML templates
+│   │   ├── auth/          # Templates for auth (login.html, register.html)
+│   │   └── expense/       # Templates for expenses (dashboard.html)
+│   ├── static/            # Static files (CSS, JS, images)
+│
+├── migrations/            # Database migrations (Alembic)
+├── tests/                 # Unit and integration tests
+│   ├── test_auth.py       # Tests for authentication
+│   ├── test_expense.py    # Tests for expenses
+│
+├── config.py              # App configuration (e.g., DB_URI, JWT_SECRET)
+├── requirements.txt       # Python dependencies
+└── run.py                 # Entry point to run the application
