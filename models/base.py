@@ -10,7 +10,7 @@ Base = declarative_base()
 class BaseCls:
     """sets the id and creation time of instance"""
     id = Column(String(50), primary_key=True)
-    created_at = Column(DateTime, default=datetime.utcnow().date())
+    created_at = Column(DateTime, default=datetime.utcnow())
 
     def __init__(self, *args, **kwargs):
         """Imitiates the models"""

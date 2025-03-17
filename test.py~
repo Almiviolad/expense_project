@@ -1,0 +1,6 @@
+from models import storage
+from flask_jwt_extended import create_access_token, create_refresh_token, get_jwt_identity, jwt_required
+
+user_id = '2b1e6bff-d612-4df7-9acb-cd019fd2e83e'
+all_expenses = storage.get_user_expenses(user_id, 'today')
+print(all_expenses)  # Debugging step

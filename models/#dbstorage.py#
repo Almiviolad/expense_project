@@ -15,7 +15,7 @@ class DBstorage:
 
     def __init__(self):
         """Instantiate the database storage class and connect to MySQL"""
-        self.__engine = create_engine('mysql+pymysql://root:aloh@localhost/trackxpense', echo=True)
+        self.__engine = create_engine(f'mysql+pymysql://root:aloh@localhost/trackxpense', echo=True)
         self.reload()
 
     def reload(self):
@@ -61,7 +61,7 @@ class DBstorage:
 
     def get_user_expenses(self, uid):
         """Fetches all expenses associated with a user ID"""
-        return self.__session.query(Expense).filter_by(user_id=uid)
+        return self.__session.query(Expense).filter_by(user_id=uid).all()
 
     def get_expense(self, expense_id):
         """Fetches a single expense by its ID"""

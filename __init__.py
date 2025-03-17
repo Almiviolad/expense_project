@@ -18,7 +18,7 @@ def create_app():
     jwt.init_app(app)
     
     app.register_blueprint(auth_bp)
-    app.register_blueprint(expense_bp)
+    app.register_blueprint(expense_bp, url_prefix='/expense')
     @app.teardown_appcontext
     def remove_session(exception=None):
         storage.remove_session()

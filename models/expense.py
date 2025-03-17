@@ -45,5 +45,5 @@ class Expense(BaseCls, Base):
             'user_id': self.user_id,
             'amount': self.amount,
             'description': self.description,
-            'category': self.category
+            'category': self.category.name
         }

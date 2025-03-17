@@ -1,0 +1,3 @@
+SECRET_KEY=almiviolad
+DATABASE_URI=mysql+pymysql://root:aloh@localhost/trackxpense
+JWT_SECRET_KEY=almiviolad

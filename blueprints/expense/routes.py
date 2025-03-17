@@ -7,9 +7,9 @@ from models.expense import Expense
 from flask_jwt_extended import create_access_token, create_refresh_token, get_jwt_identity, jwt_required
 from blueprints.expense.utils import get_expense_by_date
 
-@expense_bp.route('', methods=['POST'])
+@expense_bp.route("/", methods=['POST'])
 @jwt_required()
-def add_expense:
+def add_expense():
     #adds new expense
     # gets the user id of the logged in user
     user_id = get_jwt_identity()
@@ -32,12 +32,13 @@ def add_expense:
     return jsonify({'message': 'Expense added succssfully'}), 201
 
 # get expense by date to date, show expens diagram, delete expense, update, 
-@expense_bp.route('', methods={'GET'})
+@expense_bp.route("/", methods={'GET'})
 @jwt_required()
 def get_expenses():
     user_id = get_jwt_identity()
-    data = request.args.get('filter_type')
-    if  not 'filter_type':
+    filter_type = request.args.get('filter_type', 'today')
+    category = request.args.get('category', None)
+    if  'filter_type' == None:
         return jsonify({'error': 'Mising required expenses filter fields'}), 400
     
     if filter_type == 'custom':
@@ -46,14 +47,14 @@ def get_expenses():
 
         if not start_date or not end_date:
             return jsonify({"error": "Missing start_date or end_date for custom filter"}), 400
-            try:
-                response = get_expense_by_date(user_id, filter, start_date, end_date)
-                return jsonify(response), 200
-            except Exception as err:
-                return jsonify({'error': str(err)}), 400
+        try:
+            response = get_expense_by_date(user_id, filter_type, start_date, end_date, category)
+            return jsonify(response), 200
+        except Exception as err:
+            return jsonify({'error': str(err)}), 400
             
     try:
-        response = get_expense_by_date(user_id, filter)
+        response = get_expense_by_date(user_id, filter_type)
         return jsonify(response), 200
     except Exception as err:
                 return jsonify({'error': str(err)}), 400
